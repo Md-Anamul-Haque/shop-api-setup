@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { connection } from "../../config/db";
-import sendError from "../../lib/responses/sendError";
-import sendSuccess from "../../lib/responses/sendSuccess";
+import { errorResponse, successResponse } from "../../lib/responses";
 const customerFind = async (req: Request, res: Response) => {
     console.log('hello')
     try {
@@ -9,7 +8,7 @@ const customerFind = async (req: Request, res: Response) => {
             'SELECT * FROM `customers` where ',
             function (err, results, fields) {
                 console.log(fields); // fields contains extra meta data about results, if available
-                sendSuccess({
+                successResponse({
                     res,
                     data: results
                 })
@@ -17,7 +16,7 @@ const customerFind = async (req: Request, res: Response) => {
             }
         );
     } catch (err: any) {
-        sendError({ res, message: err.message })
+        errorResponse({ res, message: err.message })
     }
 }
 export default customerFind

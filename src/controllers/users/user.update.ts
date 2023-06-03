@@ -1,13 +1,13 @@
 import { Request, Response } from "express"
-import { sendError, sendSuccess } from "../../../lib/responses"
+import { errorResponse, successResponse } from "../../lib/responses"
 
-const updateUser = async(req: Request, res: Response) => {
+const updateUser = async (req: Request, res: Response) => {
     try {
         // const hostname: string = req.hostname
         // const id:string | number = req.params.id
         // const user: string = req.user // {usrname:string,role:string}
         return (
-            sendSuccess({
+            successResponse({
                 res,
                 data: { abc: 'abc' },
                 message: "update success"
@@ -15,7 +15,7 @@ const updateUser = async(req: Request, res: Response) => {
         )
     } catch (err: any) {
         return (
-            sendError({ res, message: err.message })
+            errorResponse({ res, message: err.message })
         )
     }
 }

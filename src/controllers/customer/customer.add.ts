@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { connection } from "../../config/db";
-import sendError from "../../lib/responses/sendError";
+import { errorResponse } from "../../lib/responses";
 import userTypes from "../../types/userTypes";
 const customerAdd = async (req: Request | any, res: Response) => {
     try {
@@ -35,7 +35,7 @@ const customerAdd = async (req: Request | any, res: Response) => {
             `
         )
     } catch (err: any) {
-        sendError({ res, message: err.message })
+        errorResponse({ res, message: err.message })
     }
 }
 

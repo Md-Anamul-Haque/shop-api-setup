@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import sharp from "sharp";
-import sendError from "../../lib/responses/sendError";
+import { errorResponse } from "../../lib/responses";
 
 // error.jpg
 
@@ -30,13 +30,13 @@ const findOneImage = async (req: Request, res: Response) => {
                     })
                     .catch((err2: any) => {
                         console.log(err2);
-                        sendError({ res, message: 'Internal Server Error' })
+                        errorResponse({ res, message: 'Internal Server Error' })
                     });
                 console.log(err);
             });
     } catch (err: any) {
         return (
-            sendError({ res, message: 'Internal Server Error' })
+            errorResponse({ res, message: 'Internal Server Error' })
         )
     }
 }

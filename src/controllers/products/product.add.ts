@@ -1,15 +1,14 @@
 import { Request, Response } from "express";
 import findMaxId_PlusOne from "../../lib/actions/findMaxIdPlusOne";
 import insertData from "../../lib/actions/insertData";
-import sendError from "../../lib/responses/sendError";
-import sendSuccess from "../../lib/responses/sendSuccess";
+import { errorResponse, successResponse } from "../../lib/responses";
 import productMt_Types from "../../types/productMt_types";
 import userTypes from "../../types/userTypes";
 
 const addProduct = async (req: Request | any, res: Response) => {
     try {
         const user: userTypes = req.user;
-        console.log({user})
+        console.log({ user })
         const table = 'product_mt';
         const pd_image = '',
             pd_id = `pd-${findMaxId_PlusOne({ table, colName: 'pd_id' })}`;
@@ -38,19 +37,19 @@ const addProduct = async (req: Request | any, res: Response) => {
         };
         const { err, fields, rows } = await insertData({ table, data });
         if (err) {
-            sendError({
+            errorResponse({
                 res,
                 message: err.message,
             })
         } else {
-            sendSuccess({
+            successResponse({
                 res,
                 data: { ...data, pd_id, org_code },
                 message: 'add success'
             })
         }
     } catch (err: any) {
-        sendError({
+        errorResponse({
             res,
             message: err.message,
         })

@@ -1,16 +1,15 @@
 import { Request, Response } from "express";
-import sendError from "../../lib/responses/sendError";
-import sendSuccess from "../../lib/responses/sendSuccess";
+import { errorResponse, successResponse } from "../../lib/responses";
 
 const findImage = async (req: Request, res: Response) => {
     try {
-        sendSuccess({
+        successResponse({
             res,
             message: "return meny images",
             data: ['abc.jpg', 'xyz.png']
         })
     } catch (err: any) {
-        sendError({
+        errorResponse({
             res,
             message: err.message,
             statusCode: 404

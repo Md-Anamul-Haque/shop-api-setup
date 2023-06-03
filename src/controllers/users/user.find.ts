@@ -1,12 +1,12 @@
 import { Request, Response } from "express"
-import { sendError, sendSuccess } from "../../../lib/responses"
+import { errorResponse, successResponse } from "../../lib/responses"
 
-const findUser = async(req: Request, res: Response) => {
+const findUser = async (req: Request, res: Response) => {
     try {
         const hostname: string = req.hostname
-        const category:string | number = req.params.category
+        const category: string | number = req.params.category
         return (
-            sendSuccess({
+            successResponse({
                 res,
                 data: { abc: 'abc' },
                 message: "find success"
@@ -14,7 +14,7 @@ const findUser = async(req: Request, res: Response) => {
         )
     } catch (err: any) {
         return (
-            sendError({ res, message: err.message })
+            errorResponse({ res, message: err.message })
         )
     }
 }
